@@ -1,3 +1,22 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-content>
+      <ion-list id="inbox-list">
+        <ion-list-header>Menú</ion-list-header>
+        <ion-note></ion-note>
+
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-item routerDirection="p.direct" [routerLink]="[p.url]">
+            <ion-icon slot="start" [name]="p.icon"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-item (click)="logout()" routerDirection="forward" [routerLink]="">
+          <ion-icon slot="start" name="exit-outline"></ion-icon>
+          <ion-label>Desconectar</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

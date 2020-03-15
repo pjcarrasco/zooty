@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Lugares cercanos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="changeView()">
+        <ion-icon name="list-outline" *ngIf="mapView"></ion-icon>
+        <ion-icon name="map-outline"  *ngIf="!mapView"></ion-icon>
+      </ion-button>
+      <ion-button (click)="newLocation()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div #map id="map_canvas" class="map_canvas" [hidden]="!mapView"></div>
+
+  <ion-list *ngIf="!mapView">
+    <ion-item button *ngFor="let lugar of lugares; index as i;" (click)="infoListDetalle(i)">
+      <ion-avatar slot="start">
+        <img src="assets/img/logo.bmp">
+      </ion-avatar>
+      <ion-label>
+        <h3>{{lugar.nombre}}</h3>
+        <div class="info-window-text-secondary">
+          <ion-chip>
+            <ion-icon name="thumbs-up" color="success"></ion-icon>
+            <ion-label>{{markerValue('positivo', 0)}}</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <ion-icon name="thumbs-down" color="danger"></ion-icon>
+            <ion-label>{{markerValue('negativo', 0)}}</ion-label>
+          </ion-chip>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed"  (click)="showFilter()">
+    <ion-fab-button size="small">
+      <ion-icon name="filter-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <div #info class="info-window" *ngIf="mapView">
+    <img src="assets/img/logo.bmp" />
+    <div class="info-window-text">
+      <h6 class="info-window-text-primary">{{markerValue('nombre')}}</h6>
+      <div class="info-window-text-secondary">
+        <ion-chip>
+          <ion-icon name="thumbs-up" color="success"></ion-icon>
+          <ion-label>{{markerValue('positivo', 0)}}</ion-label>
+        </ion-chip>
+        <ion-chip>
+          <ion-icon name="thumbs-down" color="danger"></ion-icon>
+          <ion-label>{{markerValue('negativo', 0)}}</ion-label>
+        </ion-chip>
+      </div>
+      <div class="info-window-actions">
+        <ion-icon name="information-circle-outline" class="info-window-icon" (click)="infoIconDetalle()"></ion-icon>
+        <ion-icon name="close-circle-outline" class="info-window-icon" (click)="infoIconClose()"></ion-icon>
+      </div>
+    </div>
+  </div>
+</ion-content>

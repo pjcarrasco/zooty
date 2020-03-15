@@ -1,0 +1,37 @@
+<ion-content>
+  <div class="ion-padding-horizontal ion-text-center animated fadeInDown">
+    <div class="logo"></div>
+    <h4 class="ion-no-margin">
+      <ion-text color="dark" class="fw700">
+        Zooty
+      </ion-text>
+    </h4>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="doLogin()" *ngIf="form">
+    <ion-item>
+      <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-text color="danger">
+      <small *ngIf="submitted && controlError('email', 'email')">El email tiene un formato incorrecto</small>
+      <small *ngIf="submitted && controlError('email', 'required')">El email es obligatorio</small>
+    </ion-text>
+    <ion-item>
+      <ion-label position="floating">Password <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-text color="danger">
+      <small *ngIf="submitted && controlError('password', 'required')">El password es obligatorio</small>
+    </ion-text>
+    <ion-button expand="block" color="primary" type="submit">
+      Entrar
+    </ion-button>
+    <ion-text color="secondary" class="ion-text-center">
+      <p>No tienes cuenta?</p>
+    </ion-text>
+    <ion-button expand="block" color="primary" type="button" (click)="goRegistro()">
+      Registrate
+    </ion-button>
+    
+  </form>
+</ion-content>

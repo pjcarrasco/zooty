@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cuentanos algo de ti</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="modificarDatosUsuario()" *ngIf="form">
+    <ion-item>
+      <ion-label position="floating">E-Mail <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-text color="danger">
+      <small *ngIf="submitted && controlError('email', 'email')">El email tiene un formato incorrecto</small>
+      <small *ngIf="submitted && controlError('email', 'required')">El email es obligatorio</small>
+    </ion-text>
+    <ion-item>
+      <ion-label position="floating">Nombre <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+    <ion-text color="danger">
+      <small *ngIf="submitted && controlError('nombre', 'required')">El nombre es obligatorio</small>
+    </ion-text>
+    <ion-item>
+      <ion-label position="floating">Apellidos <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="apellidos" type="text"></ion-input>
+    </ion-item>
+    <ion-text color="danger">
+      <small *ngIf="submitted && controlError('apellidos', 'required')">Los apellidos son obligatorios</small>
+    </ion-text>
+    <ion-item>
+      <ion-label position="floating">Localidad <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required formControlName="ciudad" type="text"></ion-input>
+    </ion-item>
+    <ion-text color="danger">
+      <small *ngIf="submitted && controlError('ciudad', 'required')">La localidad es obligatoria</small>
+    </ion-text>
+    <ion-item>
+      <ion-label>Fecha de nacimiento <ion-text color="danger">*</ion-text></ion-label>
+      <ion-datetime value="" placeholder="Selecciona fecha" formControlName="fecha_nacimiento"></ion-datetime>
+    </ion-item>
+    <ion-text color="danger">
+      <small *ngIf="submitted && controlError('fecha_nacimiento', 'required')">La Fecha de nacimiento es obligatoria</small>
+    </ion-text>
+    <ion-item>
+      <ion-label>Sexo <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select formControlName="sexo">
+        <ion-select-option value="hombre">Hombre</ion-select-option>
+        <ion-select-option value="mujer">Mujer</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-text color="danger">
+      <small *ngIf="submitted && controlError('sexo', 'required')">Indicanos tu sexo</small>
+    </ion-text>
+    <ion-button expand="block" color="primary" type="submit">
+      Modificar mis datos
+    </ion-button>
+  </form>
+</ion-content>

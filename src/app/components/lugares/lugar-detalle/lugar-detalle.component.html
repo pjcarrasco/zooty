@@ -1,0 +1,59 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()"><ion-icon name="close"></ion-icon>          
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{lugar.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-card class="detail">
+    <ion-card-header>
+      <ion-img src="assets/img/logo.bmp"></ion-img>
+    </ion-card-header>
+    <ion-card-content>
+      {{lugar.descripcion}}
+    </ion-card-content>
+    <ion-footer>
+      <ion-row>
+        <ion-col center text-center>
+          <ion-button expand="block" size="small" fill="clear" color="primary" (click)="consultaComentarios()">
+            {{totalComentarios()}} Comentarios
+          </ion-button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-button expand="block" size="small" fill="clear" color="success" (click)="pushRate(true)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <ion-badge color="medium" slot="end">{{lugar.positivo}}</ion-badge>
+          </ion-button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-button expand="block" size="small" fill="clear" color="danger" (click)="pushRate(false)">
+            <ion-icon name="thumbs-down"></ion-icon>
+            <ion-badge color="medium" slot="end">{{lugar.negativo}}</ion-badge>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </ion-card>
+
+  <ion-list *ngIf="listaComentarios">
+    <ion-list-header>
+      Comentarios
+    </ion-list-header>
+    <ion-item *ngFor="let comentario of listaComentarios">
+      <ion-avatar slot="start">
+        <ion-icon name="thumbs-up" color="success" *ngIf="comentario.puntuacion == 1"></ion-icon>
+        <ion-icon name="thumbs-down" color="danger" *ngIf="comentario.puntuacion == 0"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{comentario.comentario}}</h3>
+        <p>{{comentario.usuario.usuario}} el {{comentario.fecha | fechaHoraEs}}</p>
+      </ion-label>
+    </ion-item>
+    </ion-list>
+
+
+
+</ion-content>
